@@ -619,7 +619,7 @@ class CLI(object): #pylint: disable=too-many-public-methods
                     self._yellow))
                 self._output('')
 
-    def AddGroupMember(self, group_name, target_name): #pylint: disable=invalid-name
+    def AddGroupMember(self, group_name, target_list): #pylint: disable=invalid-name
         """
         Add a Target to a Group's whitelist.
 
@@ -627,8 +627,14 @@ class CLI(object): #pylint: disable=too-many-public-methods
             group_name: The name of the Group to modify.
             target_name: The name of the Target to add to the Group.
         """
-        self.client.add_group_member(group_name, target_name)
-        self._output(self._green('Successfully added member to group.'))
+        print("DEBUG: " + target_list)
+        target = target_list.split(',')
+        print(target)
+        for t in target:
+            self.client.add_group_member(group_name, t)
+            self._output(self._green('Successfully added member to group'))
+
+
 
     def RemoveGroupMember(self, group_name, target_name): #pylint: disable=invalid-name
         """
@@ -1163,7 +1169,7 @@ def build_cli() -> CLI:
     args = parser.parse_args()
 
     if not args.uri:
-        args.uri = "http://redteam-arsenal.com"
+        args.uri = "http://cyb3r.it"
     return CLI(uri=args.uri, api_key_file=args.api_key_file, username=args.api_user, password=args.api_pass)
 
 
