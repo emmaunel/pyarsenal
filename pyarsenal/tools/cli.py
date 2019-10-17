@@ -1169,7 +1169,7 @@ def build_cli() -> CLI:
     args = parser.parse_args()
 
     if not args.uri:
-        args.uri = "http://cyb3r.it"
+        args.uri = "http://104.198.219.216"
     return CLI(uri=args.uri, api_key_file=args.api_key_file, username=args.api_user, password=args.api_pass)
 
 
